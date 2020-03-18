@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% block extrahead %}
+{{ my_form.media }}
+{% endblock %}
+{% block title %}New Guest{% endblock %}
+
+{% block content %}
+<h1>New Guest</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{my_form|crispy}}
+    <button type="submit" class="btn btn-primary">Add Guest</button>
+</form>
+{% endblock %}

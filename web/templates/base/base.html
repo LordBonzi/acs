@@ -1,0 +1,47 @@
+{% load bootstrap4 %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/darkly/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rCA2D+D9QXuP2TomtQwd+uP50EHjpafN+wruul0sXZzX/Da7Txn4tB9aLMZV4DZm" crossorigin="anonymous">
+  {% bootstrap_javascript jquery='full' %}{# Embed Bootstrap JS+jQuery #}
+  <title>{% block title %}{% endblock %}</title>
+  {% block extrahead %}
+  {% endblock %}
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'IndexView' %}">ACS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" >
+          <ul class="nav navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+            <li><a class="nav-item nav-link" href="{% url 'UserInfoView' %}">Welcome, {{ user.first_name }}</a></li>
+            <li><a class="nav-item nav-link" href="{% url 'account_logout' %}">Logout</a></li>
+            {% else %}
+            <li><a class="nav-item nav-link" href="{% url 'account_login' %}">Login</a></li>
+            <li><a class="nav-item nav-link" href="{% url 'account_signup' %}">Register</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
+
+</html>
+
+<html>
